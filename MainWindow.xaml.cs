@@ -25,6 +25,8 @@ namespace Movie_Database
         {
             InitializeComponent();
 
+            Movie.Registry.Add(new Movie("The Shawshank Redemption", "Frank Darabont", 142));
+
             RegistryDataGrid.ItemsSource = Movie.Registry;
         }
 

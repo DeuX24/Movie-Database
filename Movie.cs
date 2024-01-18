@@ -12,28 +12,31 @@ namespace Movie_Database
 
         public string Title { get; set; }
         public string Director { get; set; }
-        public TimeSpan TimeSpan { get; set; }
+        public TimeSpan Runtime { get; set; }
+        public string RuntimeString => RuntimeFormat();
 
         public Movie(string title, string director, TimeSpan timeSpan)
         {
             Title = title;
             Director = director;
-            TimeSpan = timeSpan;
+            Runtime = timeSpan;
         }
 
-        public Movie(string title, string director, int minutes) 
+        public Movie(string title, string director, int minutes)
         {
             Title = title;
             Director = director;
-            TimeSpan = new TimeSpan(0, minutes, 0);
+            Runtime = new TimeSpan(0, minutes, 0);
         }
+
+        public Movie() { }
 
         public override string ToString()
         {
-            if(TimeSpan.Hours > 0)
-                return $"{Title}, Regisserad av {Director}, {TimeSpan.Hours} timmar och {TimeSpan.Minutes} minuter lång";
+            if (Runtime.Hours > 0)
+                return $"{Title}, Regisserad av {Director}, {Runtime.Hours} timmar och {Runtime.Minutes} minuter lång";
             else
-                return $"{Title}, Regisserad av {Director}, {TimeSpan.Minutes} minuter lång";
+                return $"{Title}, Regisserad av {Director}, {Runtime.Minutes} minuter lång";
         }
 
         public void AddMovie()
@@ -46,6 +49,28 @@ namespace Movie_Database
         {
             Registry.Remove(this);
             SaveSystem.SaveMovies();
+        }
+
+        private string RuntimeFormat()
+        {
+            int hours = Runtime.Hours;
+            int minutes = Runtime.Minutes;
+
+            if (hours > 0)
+            {
+                if (minutes > 0)
+                {
+                    return $"{hours} hours and {minutes} minutes";
+                }
+                else
+                {
+                    return $"{hours} hours";
+                }
+            }
+            else
+            {
+                return $"{minutes} minutes";
+            }
         }
     }
 }

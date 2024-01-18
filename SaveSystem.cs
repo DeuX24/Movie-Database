@@ -22,10 +22,19 @@ namespace Movie_Database
         // Denna funktion använder JsonSerializer för att läsa en lista med filmer från en fil.
         public static List<Movie> LoadMovies()
         {
-            string path = AppContext.BaseDirectory;
-            string json = File.ReadAllText(path);
-            var movies = JsonSerializer.Deserialize<List<Movie>>(json);
-            return movies ?? new List<Movie>();
+            string directory = AppContext.BaseDirectory;
+            string fileName = "movies.json";
+            string filePath = Path.Combine(directory, fileName);
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                var movies = JsonSerializer.Deserialize<List<Movie>>(json);
+                return movies ?? new List<Movie>();
+            }
+            else
+            {
+                return new List<Movie>();
+            }
         }
     }
 }
