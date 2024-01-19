@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Movie_Database"
         mc:Ignorable="d"
-        Title="Movie Information" Height="300" Width="500">
+        Title="Movie Information" Height="300" Width="500" MinHeight="260" MinWidth="400">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
@@ -18,23 +18,42 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
+            <RowDefinition Height="*"/>
+
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <ItemsControl Name="MovieInformationItemsControl" Margin="5,5" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2">
+        <ItemsControl Name="MovieInformationItemsControl" Margin="5,5" Grid.Row="1" Grid.Column="1" Grid.RowSpan="5" Grid.ColumnSpan="1">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <Label Content="{Binding Header}" FontWeight="Bold"/>
-                        <TextBlock Text="{Binding Text}"/>
+                        <TextBox Text="{Binding Text}" TextWrapping="Wrap" AcceptsReturn="True" Margin="5,0,5,5">
+                            <TextBox.Effect>
+                                <DropShadowEffect/>
+                            </TextBox.Effect>
+                        </TextBox>
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <!--WrapPanel Orientation="Vertical"/>-->
-                    <UniformGrid Columns="2"/>
+                    <WrapPanel Orientation="Vertical"/>
+                    <!--<UniformGrid Columns="2"/> -->
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
+
+        <Button Name="btnSave" Content="Save" Grid.Column="2" Grid.Row="3" IsCancel="True" Padding="1,1,1,1" FontSize="16" MaxWidth="60" MaxHeight="40" MinWidth="45" MinHeight="25" Click="btnSave_Click" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button Name="btnClose" Content="Close" Grid.Column="2" Grid.Row="1" Padding="1,1,1,1" FontSize="16" MaxWidth="60" MaxHeight="40" MinWidth="45" MinHeight="25" Click="btnClose_Click">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
     </Grid>
 </Window>
