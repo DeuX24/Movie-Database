@@ -19,11 +19,11 @@ namespace Movie_Database
             File.WriteAllText(path, json);
         }
 
-        // Denna funktion använder JsonSerializer för att läsa en lista med filmer från en fil.
+        // Denna funktion läser in en fil och använder JsonSerializer för att avkoda textinnehållet till Movie klassen.
         public static List<Movie> LoadMovies()
         {
             string directory = AppContext.BaseDirectory;
-            string fileName = "movies.json";
+            const string fileName = "movies.json";
             string filePath = Path.Combine(directory, fileName);
             if (File.Exists(filePath))
             {

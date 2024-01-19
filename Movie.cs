@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,14 @@ namespace Movie_Database
         public static List<Movie> Registry = SaveSystem.LoadMovies();
 
         public string Title { get; set; }
-        public string Director { get; set; }
+        public string Director { get; set; } = string.Empty;
         public TimeSpan Runtime { get; set; }
+        public float Rating { get; set; } = float.NaN;
+        public string Genre { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public DateOnly ReleaseDate { get; set; } = DateOnly.MinValue;
+        public string Language { get; set; } = string.Empty;
+        public string Budget { get; set; } = string.Empty;
         public string RuntimeString => RuntimeFormat();
 
         public Movie(string title, string director, TimeSpan timeSpan)

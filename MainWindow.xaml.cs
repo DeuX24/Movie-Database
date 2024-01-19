@@ -37,5 +37,15 @@ namespace Movie_Database
             SaveSystem.SaveMovies();
             Application.Current.Shutdown();
         }
+
+        // When double-clicked, open a new window with the movie information.
+        private void RegistryDataGrid_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var movieDataWin = new MovieInformationWindow(new Movie("The Shawshank Redemption", "Frank Darabont", 142));
+
+            movieDataWin.Show();
+
+            movieDataWin.Focus();
+        }
     }
 }
