@@ -24,8 +24,7 @@ namespace Movie_Database
         public string Runtime
         {
             get => RuntimeFormat();
-            set { RuntimeSpan = ParseRuntimeString(value); } 
-        
+            set => RuntimeSpan = ParseRuntimeString(value);
         }
 
         public Movie(string title, string director, TimeSpan timeSpan)
@@ -60,6 +59,8 @@ namespace Movie_Database
                 Registry[movieIndex] = this;
             else
                 Registry.Add(this);
+
+            MainWindow.Instance?.RegistryDataGrid.Items.Refresh();
 
             SaveSystem.SaveMovies();
         }

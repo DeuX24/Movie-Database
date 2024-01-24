@@ -48,7 +48,7 @@ namespace Movie_Database
 
         }
 
-        private void NewMovie()
+        private Movie GetMovie()
         {
             Movie movie = new Movie();
 
@@ -64,7 +64,7 @@ namespace Movie_Database
                     continue;
                 }
 
-                switch(matchingProperty.PropertyType) 
+                switch (matchingProperty.PropertyType)
                 {
                     case Type t when t == typeof(string):
                         matchingProperty.SetValue(movie, headerAndText.Text);
@@ -89,7 +89,20 @@ namespace Movie_Database
                         break;
                 }
             }
+
+            return movie;
+        }
+
+        private void NewMovie()
+        {
+            Movie movie = GetMovie();
+            
             movie.AddMovie();
+        }
+
+        public void OverwriteMovie(int movieIndex)
+        {
+            Movie.Registry[movieIndex] = GetMovie();
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -100,6 +113,15 @@ namespace Movie_Database
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            var titleElement = headerAndTextList.Find(headerAndText => headerAndText.Header == "Title");
+
+            var index = Movie.Registry.FindIndex(x => x.Title == titleElement.Text);
+
+            if (index != -1)
+            {
+                OverwriteMovie(index);
+            }
+
             NewMovie();
         }
     }
