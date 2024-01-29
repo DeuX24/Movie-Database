@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace Movie_Database
 {
@@ -21,7 +22,7 @@ namespace Movie_Database
     /// </summary>
     public partial class MovieInformationWindow : Window
     {
-        private List<HeaderAndText> headerAndTextList = new();
+        ObservableCollection<HeaderAndText> _headerAndTextList;
 
         public MovieInformationWindow(Movie movie)
         {
@@ -29,7 +30,7 @@ namespace Movie_Database
 
             var selectedMovie = movie;
 
-            headerAndTextList = new();
+            _headerAndTextList = new ObservableCollection<HeaderAndText>();
 
             Type movieType = typeof(Movie);
             PropertyInfo[] properties = movieType.GetProperties();
@@ -41,10 +42,10 @@ namespace Movie_Database
                 var header = property.Name;
                 var text = property.GetValue(selectedMovie)?.ToString() ?? "N/A";
 
-                headerAndTextList.Add(new HeaderAndText(header, text));
+                _headerAndTextList.Add(new HeaderAndText(header, text));
             }
 
-            MovieInformationItemsControl.ItemsSource = headerAndTextList;
+            MovieInformationItemsControl.ItemsSource = _headerAndTextList;
 
         }
 
@@ -55,7 +56,9 @@ namespace Movie_Database
             Type movieType = typeof(Movie);
             PropertyInfo[] movieProperties = movieType.GetProperties();
 
-            foreach (var headerAndText in headerAndTextList)
+            foreach(var item in MovieInformationItemsControl.Items)
+
+            foreach (var headerAndText in _headerAndTextList)
             {
                 PropertyInfo? matchingProperty = Array.Find(movieProperties, prop => prop.Name == headerAndText.Header);
 
@@ -113,7 +116,7 @@ namespace Movie_Database
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var titleElement = headerAndTextList.Find(headerAndText => headerAndText.Header == "Title");
+            var titleElement = _headerAndTextList.First(headerAndText => headerAndText.Header == "Title");
 
             var index = Movie.Registry.FindIndex(x => x.Title == titleElement.Text);
 

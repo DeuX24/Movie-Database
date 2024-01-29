@@ -10,7 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="90*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="15*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
@@ -28,5 +28,8 @@
                 <!--Add more columns as needed -->
             </DataGrid.Columns >
         </DataGrid>
+        <Button x:Name="BtnNewMovie" Grid.Column="2" Click="BtnNewMovie_OnClick" Content="New Movie" MinWidth="70" MinHeight="25" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Margin="0,0,0,100"/>
+        <Button x:Name="BtnExit" Grid.Column="2" Click="BtnExit_OnClick" IsCancel="True" Content="Exit" MinWidth="70" MinHeight="25" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Margin="0,100,0,0"/>
+
     </Grid>
 </Window>

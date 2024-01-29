@@ -30,7 +30,7 @@ namespace Movie_Database
 
             Instance = this;
 
-            Movie.Registry.Add(new Movie("The Shawshank Redemption", "Frank Darabont", 142));
+            // Movie.Registry.Add(new Movie("The Shawshank Redemption", "Frank Darabont", 142));
 
             RegistryDataGrid.ItemsSource = Movie.Registry;
         }
@@ -46,11 +46,27 @@ namespace Movie_Database
         // When double-clicked, open a new window with the movie information.
         private void RegistryDataGrid_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var movieDataWin = new MovieInformationWindow(new Movie("The Shawshank Redemption", "Frank Darabont", 142));
+            if (RegistryDataGrid.SelectedItem is not Movie mov) return;
+
+            var movieDataWin = new MovieInformationWindow(mov);
 
             movieDataWin.Show();
 
             movieDataWin.Focus();
+        }
+
+        private void BtnNewMovie_OnClick(object sender, RoutedEventArgs e)
+        {
+            var movieDataWin = new MovieInformationWindow(new Movie());
+
+            movieDataWin.Show();
+
+            movieDataWin.Focus();
+        }
+
+        private void BtnExit_OnClick(object sender, RoutedEventArgs e)
+        {
+            Exit();
         }
     }
 }

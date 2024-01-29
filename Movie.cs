@@ -102,16 +102,15 @@ namespace Movie_Database
 
             for (int i = 0; i < parts.Length; i++)
             {
-                if (i + 1 < parts.Length)
+                if (i + 1 >= parts.Length) continue;
+
+                if (parts[i + 1].Equals("hours", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (parts[i + 1].Equals("hours", StringComparison.OrdinalIgnoreCase))
-                    {
-                        int.TryParse(parts[i], out hours);
-                    }
-                    else if (parts[i + 1].Equals("minutes", StringComparison.OrdinalIgnoreCase))
-                    {
-                        int.TryParse(parts[i], out minutes);
-                    }
+                    int.TryParse(parts[i], out hours);
+                }
+                else if (parts[i + 1].Equals("minutes", StringComparison.OrdinalIgnoreCase))
+                {
+                    int.TryParse(parts[i], out minutes);
                 }
             }
 

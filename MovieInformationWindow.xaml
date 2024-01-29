@@ -19,9 +19,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-
             <RowDefinition Height="*"/>
-
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <ItemsControl Name="MovieInformationItemsControl" Margin="5,5" Grid.Row="1" Grid.Column="1" Grid.RowSpan="5" Grid.ColumnSpan="1">
